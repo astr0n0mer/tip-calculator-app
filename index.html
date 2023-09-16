@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Tip calculator app | Frontend Mentor</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>
+        <img src="./images/logo.svg" alt="Splitter" class="logo" />
+      </h1>
+    </header>
+
+    <main>
+      <form class="form js-form">
+        <fieldset class="form__fields">
+          <div class="form__field field">
+            <label for="bill" class="field__label">Bill</label>
+            <label for="bill" class="field__error js-bill-error"
+              >Invalid input</label
+            >
+            <input
+              type="number"
+              inputmode="numeric"
+              name="bill"
+              id="bill"
+              class="field__input input--bill js-bill"
+              min="0.01"
+              step="0.01"
+              placeholder="0"
+            />
+          </div>
+
+          <div class="form__field field">
+            <label class="field__label">Select Tip %</label>
+            <label for="tip-custom" class="field__error js-tip-error"
+              >Invalid input</label
+            >
+
+            <div class="button-grid">
+              <input
+                type="radio"
+                name="tip"
+                id="tip-5"
+                value="5"
+                class="field__input--hidden js-tip-button"
+              />
+              <label for="tip-5" class="field__button">5%</label>
+              <input
+                type="radio"
+                name="tip"
+                id="tip-10"
+                value="10"
+                class="field__input--hidden js-tip-button"
+              />
+              <label for="tip-10" class="field__button">10%</label>
+              <input
+                type="radio"
+                name="tip"
+                id="tip-15"
+                value="15"
+                class="field__input--hidden js-tip-button"
+              />
+              <label for="tip-15" class="field__button">15%</label>
+              <input
+                type="radio"
+                name="tip"
+                id="tip-25"
+                value="25"
+                class="field__input--hidden js-tip-button"
+              />
+              <label for="tip-25" class="field__button">25%</label>
+              <input
+                type="radio"
+                name="tip"
+                id="tip-50"
+                value="50"
+                class="field__input--hidden js-tip-button"
+              />
+              <label for="tip-50" class="field__button">50%</label>
+              <input
+                type="number"
+                inputmode="numeric"
+                name="tip"
+                id="tip-custom"
+                class="field__input field__button--custom js-custom-tip"
+                min="0"
+                step="1"
+                placeholder="Custom"
+              />
+            </div>
+          </div>
+
+          <div class="form__field field">
+            <label for="number-of-people" class="field__label"
+              >Number of People</label
+            >
+            <label
+              for="number-of-people"
+              class="field__error js-number-of-people-error"
+              >Invalid input</label
+            >
+            <input
+              type="number"
+              inputmode="numeric"
+              name="number-of-people"
+              id="number-of-people"
+              class="field__input input--number-of-people js-number-of-people"
+              min="1"
+              step="1"
+              placeholder="0"
+            />
+          </div>
+        </fieldset>
+
+        <section class="form__outputs">
+          <div class="output-grid">
+            <h2 class="form__output output__heading">
+              Tip Amount
+              <p class="output__subheading">/ person</p>
+            </h2>
+            <label class="output__label js-tip-per-person">0.00</label>
+
+            <h2 class="form__output output__heading">
+              Total
+              <p class="output__subheading">/ person</p>
+            </h2>
+            <label for="" class="output__label js-total-per-person">0.00</label>
+          </div>
+
+          <input type="reset" value="Reset" class="output__reset" />
+        </section>
+      </form>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
