@@ -11,7 +11,7 @@ const validateInput = (element, errorQuery, min) => {
   const value = element.valueAsNumber;
 
   let error = "";
-  if (isNaN(value)) error = "Invalid number";
+  if (Number.isNaN(value)) error = "Invalid number";
   if (min >= 0 && value < 0) error = "Can't be negative";
   if (min > 0 && value === 0) error = "Can't be 0";
 
@@ -26,24 +26,9 @@ const validateInput = (element, errorQuery, min) => {
 };
 
 const clearTipButtons = () =>
-  tipButtons.forEach((tipButton) => (tipButton.checked = false));
-
-const calculateTotalBillAndTip = () => {
-  const bill = billInput.valueAsNumber;
-  const tipPercentage =
-    parseInt(form.elements.tip.value) || customTipInput.valueAsNumber;
-  const numberOfPeople = numberOfPeopleInput.valueAsNumber;
-
-  if (isNaN(bill) || isNaN(tipPercentage) || isNaN(numberOfPeople)) return;
-
-  const tipAmount = bill * (tipPercentage / 100);
-  const totalAmount = bill + tipAmount;
-  const tipPerPerson = tipAmount / numberOfPeople;
-  const totalPerPerson = totalAmount / numberOfPeople;
-
-  setInnerText(tipPerPersonLabel, tipPerPerson);
-  setInnerText(totalPerPersonLabel, totalPerPerson);
-};
+  tipButtons.forEach((tipButton) => {
+    tipButton.checked = false;
+  });
 
 const setInnerText = (element, text) => {
   const formatOptions = {
@@ -57,19 +42,42 @@ const setInnerText = (element, text) => {
   );
 };
 
+const calculateTotalBillAndTip = () => {
+  const bill = billInput.valueAsNumber;
+  const tipPercentage =
+    parseInt(form.elements.tip.value, 10) || customTipInput.valueAsNumber;
+  const numberOfPeople = numberOfPeopleInput.valueAsNumber;
+
+  if (
+    Number.isNaN(bill) ||
+    Number.isNaN(tipPercentage) ||
+    Number.isNaN(numberOfPeople)
+  ) {
+    return;
+  }
+
+  const tipAmount = bill * (tipPercentage / 100);
+  const totalAmount = bill + tipAmount;
+  const tipPerPerson = tipAmount / numberOfPeople;
+  const totalPerPerson = totalAmount / numberOfPeople;
+
+  setInnerText(tipPerPersonLabel, tipPerPerson);
+  setInnerText(totalPerPersonLabel, totalPerPerson);
+};
+
 billInput.addEventListener("keyup", () => {
   validateInput(billInput, ".js-bill-error", 0);
   calculateTotalBillAndTip();
 });
 
-tipButtons.forEach((tipButton) =>
+tipButtons.forEach((tipButton) => {
   tipButton.addEventListener("click", () => {
     document
       .querySelector(".js-tip-error")
       .classList.remove("js-error--active");
     calculateTotalBillAndTip();
-  })
-);
+  });
+});
 
 customTipInput.addEventListener("keyup", () => {
   validateInput(customTipInput, ".js-tip-error", 0);
