@@ -33,7 +33,7 @@ const clearTipButtons = () =>
 const setInnerText = (element, text) => {
   const formatOptions = {
     currency: "USD",
-    maximumFractionDigits: "2",
+    maximumFractionDigits: 2,
     style: "currency",
   };
 
@@ -86,7 +86,8 @@ customTipInput.addEventListener("keyup", () => {
 
 customTipInput.addEventListener("focus", () => {
   clearTipButtons();
-  customTipInput.dispatchEvent("keyup");
+  validateInput(customTipInput, ".js-tip-error", 0);
+  calculateTotalBillAndTip();
 });
 
 numberOfPeopleInput.addEventListener("keyup", () => {
